@@ -1,21 +1,22 @@
 import { motion } from "framer-motion";
 import Button from "./Button";
+import { ReactNode } from "react";
 
-interface DialogProps {
+interface ModalProps {
   message: string;
   confirmMessage?: string;
-  cancelMessage?: string;
   onConfirm?: () => void;
   onCancel?: () => void;
+  children: ReactNode;
 }
 
-function Dialog({
+function Modal({
   message,
   confirmMessage,
-  cancelMessage,
-  onCancel,
   onConfirm,
-}: DialogProps) {
+  onCancel,
+  children,
+}: ModalProps) {
   const handleConfirm = () => {
     if (onConfirm) {
       onConfirm();
@@ -35,15 +36,21 @@ function Dialog({
       transition={{ duration: 0.5 }}
       className="fixed inset-0 flex items-center justify-center z-50"
     >
-      <div className="flex flex-col items-center justify-center gap-5 bg-darker border border-background px-10 py-5 rounded-lg">
-        <h1 className="text-xl">{message}</h1>
-        <div className="flex items-center justify-center gap-5">
-          <Button name={confirmMessage} handleClick={handleConfirm} primary />
-          <Button name={cancelMessage} handleClick={handleCancel} danger />
+      <div className="flex flex-col items-center justify-center gap-5 bg-darker border border-background w-max p-6 rounded-lg">
+        <div className="flex flex-row justify-between items-center w-full">
+          <h1 className="text-2xl text-primary">{message}</h1>
+          <Button handleClick={handleCancel} close />
         </div>
+        {children}
+        <Button
+          name={confirmMessage}
+          handleClick={handleConfirm}
+          primary
+          full
+        />
       </div>
     </motion.div>
   );
 }
 
-export default Dialog;
+export default Modal;
