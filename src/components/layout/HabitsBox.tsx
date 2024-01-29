@@ -14,7 +14,7 @@ const HabitsBox: React.FC<Props> = ({
   defaultText,
 }) => {
   return (
-    <div className="w-full p-5 bg-darker rounded-[10px] flex-col justify-start items-start gap-2.5 inline-flex">
+    <div className="w-full p-5 bg-stone-900 rounded-[10px] flex-col justify-start items-start gap-2.5 inline-flex">
       <div className="text-[16px] font-semibold text-base">
         <span className="text-base text-primary">{coloredText}</span>
         {defaultText} <br />
